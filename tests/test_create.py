@@ -9,7 +9,8 @@ def test_create(test_client):
         ), follow_redirects=True)
 
     data = json.loads(response.data)
+    users = data['user']
 
     assert response.status_code == 201
-    assert data['user']['name'] == 'test_create_name'
-    assert data['user']['password'] == 'test_create_name_password'
+    assert users['name'] == 'test_create_name'
+    assert users['password'] == 'test_create_name_password'

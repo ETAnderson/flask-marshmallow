@@ -6,6 +6,8 @@ def test_get_by_id(test_client):
 
     data = json.loads(response.data)
 
+    users = data['user']
+
     assert response.status_code == 200
-    assert data['user']['name'] == 'Eric Anderson'
-    assert data['user']['password'] == 'testpass2'
+    assert users['name'] == 'Eric Anderson'
+    assert users['password'] == 'testpass2'

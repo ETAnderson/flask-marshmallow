@@ -10,6 +10,8 @@ def test_put(test_client):
 
     data = json.loads(response.data)
 
+    users = data['user']
+
     assert response.status_code == 200
-    assert data['user']['name'] == 'test_put_name'
-    assert data['user']['password'] == 'test_put_password'
+    assert users['name'] == 'test_put_name'
+    assert users['password'] == 'test_put_password'
