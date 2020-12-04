@@ -2,7 +2,7 @@ from flask import json
 
 
 def test_get_by_id(test_client):
-    response = test_client.get('/users/2')
+    response = test_client.get('/users/1')
 
     data = json.loads(response.data)
 
