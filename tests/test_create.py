@@ -9,6 +9,7 @@ def test_create(test_client):
         ), follow_redirects=True)
 
     data = json.loads(response.data)
+
     users = data['user']
 
     assert response.status_code == 201
