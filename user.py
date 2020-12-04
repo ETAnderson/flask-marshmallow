@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, make_response
-from marshmallow_sqlalchemy import ModelSchema
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from marshmallow import fields
 from flask_sqlalchemy import SQLAlchemy
 from SQLALCHEMY_DATABASE_URI import SQLALCHEMY_DATABASE_URI
@@ -81,9 +81,11 @@ class User(db.Model):
         return '<Product %d>' % self.id
 
 
-class UserSchema(ModelSchema):
+class UserSchema(SQLAlchemyAutoSchema):
     # defines input format with validation
-    class Meta(ModelSchema.Meta):
+    class Meta(SQLAlchemyAutoSchema.Meta):
+        load_instance = True
+        include_relationships = True
         model = User
         sqla_session = db.session
 
