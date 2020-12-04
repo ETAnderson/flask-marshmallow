@@ -39,10 +39,12 @@ def create_app():
     def update_user_by_id(id):
         data = request.get_json()
         get_user = User.query.get(id)
+
+        if data.get('name'):
+            get_user.name = data['name']
         if data.get('password'):
             get_user.password = data['password']
-        if data.get('name'):
-            get_user.password = data['name']
+
         db.session.add(get_user)
         db.session.commit()
         user_schema = UserSchema(only=['id', 'name', 'password'])

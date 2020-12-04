@@ -1,5 +1,3 @@
-# untested, needs build and teardown functionality fixed
-
 from flask import json
 
 
