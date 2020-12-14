@@ -2,14 +2,24 @@ from flask import Flask, request, jsonify, make_response
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from marshmallow import fields
 from flask_sqlalchemy import SQLAlchemy
-from SQLALCHEMY_DATABASE_URI import SQLALCHEMY_DATABASE_URI
+from SQLALCHEMY_DATABASE_URI import test_db, dev_db
+import os
 
 db = SQLAlchemy()
 
 
+def sql_connection_string():
+    if os.environ.get("development") is True:
+        return dev_db
+    elif os.environ.get("production") is True:
+        return "not implemented"
+    else:
+        return test_db
+
+
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+    app.config['SQLALCHEMY_DATABASE_URI'] = sql_connection_string()
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 
